@@ -34,8 +34,8 @@ a:hover{color:#FF7A00}
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { v: (() => { try { return localStorage.getItem('pb-prop-v') || '6'; } catch (e) { return '6'; } })() };
-  set(v) { this.setState({ v }); try { localStorage.setItem('pb-prop-v', v); } catch (e) {} }
+  state = { v: '6' };
+  set(v) { this.setState({ v }); }
   renderVals() {
     const v = this.state.v, on = k => v === k;
     const o = {};
