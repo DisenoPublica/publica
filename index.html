@@ -9,43 +9,413 @@
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@500;700&family=Chivo:wght@500;700&family=Chivo+Mono:wght@400&family=Geist:wght@300;400;500;700&family=Geist+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;height:100%;background:#0A0A0A;overflow:hidden}
+html,body{margin:0;background:#F1EEE7;color:#141414;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 a{color:inherit;text-decoration:none}
 a:hover{color:#FF7A00}
+::selection{background:#FF7A00;color:#F1EEE7}
+html,body,*{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2713%27%20height%3D%2721%27%20viewBox%3D%270%200%2013%2021%27%20shape-rendering%3D%27crispEdges%27%3E%3Cpath%20d%3D%27M0.5%200.5%20V16.5%20L4.5%2012.5%20L7.5%2019.5%20L9.5%2018.5%20L6.5%2011.5%20H11.5%20Z%27%20fill%3D%27white%27%20stroke%3D%27black%27%20stroke-width%3D%271%27%2F%3E%3C%2Fsvg%3E") 1 1, default !important}
 </style>
 </helmet>
-<div style="display:flex;flex-direction:column;height:100vh;font-family:'Geist Mono',monospace;background:#0A0A0A;color:#FFFFFF">
-  <header style="display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px 24px;padding:4px clamp(16px,3vw,32px);border-bottom:1px solid #2A2A2A">
-    <nav style="display:flex;gap:clamp(16px,2.4vw,32px);font-size:11px;letter-spacing:.08em;text-transform:uppercase">
-      <button onClick="{{ show6 }}" style="border:0;padding:4px 0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;color:{{ fg6 }}">Opción A</button>
-      <button onClick="{{ show4 }}" style="border:0;padding:4px 0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;color:{{ fg4 }}">Opción B</button>
-      <button onClick="{{ show5 }}" style="border:0;padding:4px 0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;background:none;color:{{ fg5 }}">Opción C</button>
-    </nav>
-  </header>
-  <div style="position:relative;flex:1;min-height:0;background:#FFFFFF">
-    <iframe src="opcion-b.html" title="Opción B" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:{{ d4 }}"></iframe>
-    <iframe src="opcion-c.html" title="Opción C" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:{{ d5 }}"></iframe>
-    <iframe src="opcion-a.html" title="Opción A" style="position:absolute;inset:0;width:100%;height:100%;border:0;display:{{ d6 }}"></iframe>
+<div style="font-family:'Geist',system-ui,sans-serif;background:#F1EEE7;color:#141414;overflow-x:hidden">
+<div style="max-width:980px;margin-left:clamp(8px,5.5vw,100px);margin-right:auto">
+
+<div id="pb-progress" style="position:fixed;top:0;left:0;height:2px;width:100%;background:#FF7A00;transform-origin:left;transform:scaleX(0);z-index:60"></div>
+<div id="pb-cursor" style="display:none;position:fixed;top:0;left:0;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#F1EEE7;mix-blend-mode:difference;pointer-events:none;z-index:70;transition:width .3s,height .3s,margin .3s;opacity:0"></div>
+
+<header style="padding:clamp(64px,12vh,140px) clamp(20px,4vw,56px) 0;color:#141414">
+  <img src="assets/logo-publica-negro.png" alt="PÚBLiCA" style="display:block;width:clamp(120px,14vw,200px);height:auto">
+  <p data-reveal="1" style="margin:clamp(16px,2.4vh,24px) 0 0;max-width:420px;font-size:17px;line-height:1.5;color:#3A3A37;text-wrap:pretty"><strong style="font-weight:700;color:#141414">Somos una consultora en estrategia y comunicación</strong> que trabaja junto a las compañías<br id="pb-somos-br"> y líderes más innovadores de América Latina.</p>
+</header>
+
+<section id="top" data-screen-label="01 Hero" style="display:flex;flex-direction:column;gap:clamp(24px,3vw,40px);padding:clamp(24px,4vh,40px) clamp(20px,4vw,56px) clamp(16px,2vh,24px)">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding-top:clamp(36px,6vh,64px)">
+  <div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+    <p data-reveal="1" data-delay="300" style="margin:0;max-width:820px;font-family:'Geist',system-ui,sans-serif;font-weight:500;font-size:clamp(18px,1.7vw,26px);line-height:1.1;letter-spacing:-0.03em;color:#808080;text-wrap:balance">“Between thought and expression lies a lifetime.”</p>
+    <div data-reveal="1" data-delay="500" style="font-family:'Geist Mono',monospace;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#8A877F">— Lou Reed</div>
+  </div>
+  </div>
+  <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:clamp(16px,2vw,28px)">
+  </div>
+</section>
+
+<section id="manifiesto" data-screen-label="02 Manifiesto" style="padding:clamp(12px,2vw,24px) clamp(20px,4vw,56px) 24px">
+
+  <article data-principle="I" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">I.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Todo es público.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="II" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">II.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Todos tenemos redes. Todos tenemos poder.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="III" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">III.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">La reputación no se compra. Se construye.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="IV" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">IV.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">La estrategia antes que la acción.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="V" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">V.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Entender el negocio es clave.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="VI" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">VI.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Las opiniones no son evidencia.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="VII" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">VII.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">No estamos para decir que sí.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="VIII" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">VIII.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Nos gusta correr riesgos.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="IX" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">IX.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Trabajamos con personas que dicen la verdad.</h3>
+      </div>
+    </div>
+  </article>
+
+  <article data-principle="X" style="position:relative;padding:clamp(14px,1.8vw,24px) 0">
+    <div style="display:flex;flex-wrap:nowrap;gap:clamp(10px,1.4vw,20px);align-items:center">
+      <div data-reveal="1" style="flex:0 0 4.2em;font-family:'Chivo Mono',monospace;font-weight:400;font-size:clamp(14px,1.4vw,22px);line-height:1;letter-spacing:.04em;color:#FF7A00;padding-top:.4em">X.</div>
+      <div style="flex:1 1 0;min-width:0">
+        <h3 data-clip="1" style="margin:0;font-family:'Barlow',sans-serif;font-weight:500;font-size:clamp(16px,1.9vw,28px);line-height:1;letter-spacing:-0.02em;text-wrap:balance">Somos optimistas.</h3>
+      </div>
+    </div>
+  </article>
+</section>
+
+<div style="padding:clamp(16px,2.4vw,32px) clamp(20px,4vw,56px)">
+  <button id="pb-about-btn" onClick="{{ toggleAbout }}" aria-expanded="false" data-hover="1" style="display:inline-flex;align-items:center;gap:14px;border:1px solid #B5B1A8;border-radius:0;margin:0;cursor:pointer;background:transparent;color:#141414;padding:10px 16px;font-family:'Geist Mono',monospace;font-size:clamp(12px,1.1vw,15px);letter-spacing:.1em;text-transform:uppercase;text-align:left">
+    <span>Bienvenidos</span>
+    <span id="pb-about-icon" style="color:#FF7A00;font-size:1.4em;line-height:1;transition:transform .6s cubic-bezier(.16,1,.3,1)">+</span>
+  </button>
+</div>
+<div id="pb-about" style="display:grid;grid-template-rows:0fr;transition:grid-template-rows .9s cubic-bezier(.76,0,.24,1)">
+  <div style="overflow:hidden;min-height:0">
+
+<section id="equipo" data-screen-label="03 Equipo" style="color:#141414;border:1px solid #141414;margin:0 clamp(20px,4vw,56px);max-width:calc(100% - 2 * clamp(20px,4vw,56px));padding:clamp(40px,5vw,72px) clamp(20px,4vw,56px)">
+  <h2 data-clip="1" style="margin:0 0 clamp(28px,4vw,56px);font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(16px,1.9vw,28px);line-height:1.1;letter-spacing:-0.01em">Una parte del equipo</h2>
+  <div data-team="1" style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:32px clamp(24px,4vw,80px)">
+    <div style="flex:1 1 100%;min-width:0">
+        <div style="position:relative;width:max-content;max-width:100%;padding:22px 0 28px">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:#141414"></div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FF7A00;margin-bottom:10px">Socios</div>
+          <div style="display:flex;flex-direction:column;gap:2px;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(17.6px,2.24vw,32px);line-height:1.14;letter-spacing:-0.03em">
+            <div data-person="0" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Ezequiel Colombo<a href="https://www.linkedin.com/in/ezequielcolombo/" data-linkedin="Ezequiel Colombo" target="_blank" rel="noopener" aria-label="LinkedIn de Ezequiel Colombo" title="LinkedIn de Ezequiel Colombo" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="1" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Matías Fernández<a href="https://www.linkedin.com/in/matifer/" data-linkedin="Matías Fernández" target="_blank" rel="noopener" aria-label="LinkedIn de Matías Fernández" title="LinkedIn de Matías Fernández" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="2" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Andrés Gómez<a href="https://www.linkedin.com/in/andr%C3%A9s-g%C3%B3mez-25b8b85/" data-linkedin="Andrés Gómez" target="_blank" rel="noopener" aria-label="LinkedIn de Andrés Gómez" title="LinkedIn de Andrés Gómez" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="3" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Juan Morris<a href="https://www.linkedin.com/in/juan-morris-/" data-linkedin="Juan Morris" target="_blank" rel="noopener" aria-label="LinkedIn de Juan Morris" title="LinkedIn de Juan Morris" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="4" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Pablo Siciliano<a href="https://www.linkedin.com/in/pablosiciliano/" data-linkedin="Pablo Siciliano" target="_blank" rel="noopener" aria-label="LinkedIn de Pablo Siciliano" title="LinkedIn de Pablo Siciliano" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative;width:max-content;max-width:100%;padding:22px 0 28px">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:#141414"></div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FF7A00;margin-bottom:10px">Director ejecutivo</div>
+          <div style="display:flex;flex-direction:column;gap:2px;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(17.6px,2.24vw,32px);line-height:1.14;letter-spacing:-0.03em">
+            <div data-person="5" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Florencia Alba<a href="https://www.linkedin.com/in/mflorenciaalba/" data-linkedin="Florencia Alba" target="_blank" rel="noopener" aria-label="LinkedIn de Florencia Alba" title="LinkedIn de Florencia Alba" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative;width:max-content;max-width:100%;padding:22px 0 28px;border-bottom:1px solid #141414">
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:#141414"></div>
+          <div style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FF7A00;margin-bottom:10px">Senior Partners</div>
+          <div style="display:flex;flex-direction:column;gap:2px;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(17.6px,2.24vw,32px);line-height:1.14;letter-spacing:-0.03em">
+            <div data-person="6" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Nicolás Galuzzi<a href="https://www.linkedin.com/in/ngaluzzi/" data-linkedin="Nicolás Galuzzi" target="_blank" rel="noopener" aria-label="LinkedIn de Nicolás Galuzzi" title="LinkedIn de Nicolás Galuzzi" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="7" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Santiago Barcala<a href="https://www.linkedin.com/in/santiago-barcala-47258914/" data-linkedin="Santiago Barcala" target="_blank" rel="noopener" aria-label="LinkedIn de Santiago Barcala" title="LinkedIn de Santiago Barcala" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="8" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Ana Perazzo<a href="https://www.linkedin.com/in/ana-perazzo-2060ab1ba/" data-linkedin="Ana Perazzo" target="_blank" rel="noopener" aria-label="LinkedIn de Ana Perazzo" title="LinkedIn de Ana Perazzo" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+            <div data-person="9" style="display:flex;flex-direction:column">
+              <span data-pname="1" style="align-self:flex-start;transition:color .3s,font-weight .3s">Luz Benítez<a href="https://www.linkedin.com/in/luz-ben%C3%ADtez-19828910a/" data-linkedin="Luz Benítez" target="_blank" rel="noopener" aria-label="LinkedIn de Luz Benítez" title="LinkedIn de Luz Benítez" onClick="{{ stopLink }}" style="margin-left:.6em;font-family:'Geist Mono',monospace;font-weight:400;font-size:.42em;letter-spacing:.02em;color:#0000EE;text-decoration:underline;text-underline-offset:2px;vertical-align:.25em">LinkedIn</a></span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" data-screen-label="04 Clientes" style="color:#141414;border:1px solid #141414;margin:clamp(16px,2vw,24px) clamp(20px,4vw,56px) 0;max-width:calc(100% - 2 * clamp(20px,4vw,56px));padding:clamp(24px,3vw,48px) 0 clamp(48px,6vw,96px)">
+  <div style="padding:0 clamp(20px,4vw,56px) clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:14px;max-width:calc(62ch + 2 * clamp(20px,4vw,56px))">
+    <p data-reveal="1" style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.45;color:#141414;text-wrap:pretty">Cada empresa, organización o líder de nuestra cartera es también un partner. Trabajamos con pocos clientes porque queremos dedicarles mucho foco, tiempo y energía.</p>
+    <p data-reveal="1" data-delay="100" style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.45;color:#55524C;text-wrap:pretty">Tenemos operación en Argentina, Colombia, Chile, México y trabajamos para más de 12 países en la región y el mundo.</p>
+  </div>
+  <div style="padding:0 clamp(20px,4vw,56px)">
+    <h2 data-clip="1" style="margin:0 0 12px;font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(16px,1.9vw,28px);line-height:1.1;letter-spacing:-0.01em">Con quién trabajamos</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px clamp(20px,3vw,48px);border-top:1px solid #141414;padding-top:24px;font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(15px,1.3vw,19px);line-height:1.25;color:#55524C">
+      <span>Mercado Libre</span>
+      <span>Mercado Pago</span>
+      <span>Pedidos Ya</span>
+      <span>BHP</span>
+      <span>Uber</span>
+      <span>IRSA</span>
+      <span>Globant</span>
+      <span>TikTok</span>
+      <span>MSU</span>
+      <span>Danone</span>
+      <span>La Serenísima</span>
+      <span>Techint</span>
+      <span>Banco Interamericano de Desarrollo</span>
+      <span>Foro Llao Llao</span>
+      <span>SG Foundation</span>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios" data-screen-label="05 Testimonios" style="padding:clamp(48px,6vw,96px) 0;margin:0 clamp(20px,4vw,56px);max-width:calc(100% - 2 * clamp(20px,4vw,56px))">
+  <h2 data-clip="1" style="margin:0 0 clamp(28px,4vw,56px);font-family:'Barlow',sans-serif;font-weight:700;font-size:clamp(16px,1.9vw,28px);line-height:1.1;letter-spacing:-0.01em;text-wrap:balance">Algunas palabras sobre nuestro trabajo</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:clamp(24px,2.6vw,40px)">
+    <figure data-reveal="1" data-delay="0" style="margin:0;border-top:1px solid #141414;padding-top:20px;display:flex;flex-direction:column;gap:18px">
+      <blockquote style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.4;letter-spacing:-0.01em;color:#141414;text-wrap:pretty">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”</blockquote>
+      <figcaption style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#FF7A00"></span>Sean Summers</figcaption>
+    </figure>
+    <figure data-reveal="1" data-delay="80" style="margin:0;border-top:1px solid #141414;padding-top:20px;display:flex;flex-direction:column;gap:18px">
+      <blockquote style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.4;letter-spacing:-0.01em;color:#141414;text-wrap:pretty">“Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”</blockquote>
+      <figcaption style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#FF7A00"></span>Marcos Bulgheroni</figcaption>
+    </figure>
+    <figure data-reveal="1" data-delay="160" style="margin:0;border-top:1px solid #141414;padding-top:20px;display:flex;flex-direction:column;gap:18px">
+      <blockquote style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.4;letter-spacing:-0.01em;color:#141414;text-wrap:pretty">“Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.”</blockquote>
+      <figcaption style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#FF7A00"></span>Manuel Santos Uribelarrea</figcaption>
+    </figure>
+    <figure data-reveal="1" data-delay="240" style="margin:0;border-top:1px solid #141414;padding-top:20px;display:flex;flex-direction:column;gap:18px">
+      <blockquote style="margin:0;font-family:'Geist',system-ui,sans-serif;font-weight:300;font-size:clamp(16px,1.9vw,28px);line-height:1.4;letter-spacing:-0.01em;color:#141414;text-wrap:pretty">“Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.”</blockquote>
+      <figcaption style="font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#FF7A00"></span>Eduardo Elztain</figcaption>
+    </figure>
+  </div>
+</section>
+
   </div>
 </div>
+
+<footer data-screen-label="06 Footer" style="background:#F1EEE7;color:#141414;border-top:1px solid #141414;padding:clamp(40px,5vw,72px) clamp(20px,4vw,56px) 28px">
+  <div data-clip="1"><img src="assets/logo-publica-negro.png" alt="PÚBLiCA" style="display:block;width:min(120px,25vw);height:auto;filter:grayscale(1);opacity:.45"></div>
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:12px;font-family:'Geist Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase">
+    <span>LATAM</span>
+  </div>
+</footer>
+</div>
+</div>
 </x-dc>
-<script type="text/x-dc" data-dc-script>
+<script type="text/x-dc" data-dc-script data-props="{&quot;animSpeed&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.5,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 class Component extends DCLogic {
-  state = { v: '6' };
-  set(v) { this.setState({ v }); }
-  renderVals() {
-    const v = this.state.v, on = k => v === k;
-    const o = {};
-    ['4', '5', '6'].forEach(k => {
-      o['show' + k] = () => this.set(k);
-      o['bg' + k] = on(k) ? '#FF7A00' : 'transparent';
-      o['fg' + k] = on(k) ? '#FF7A00' : '#8A8A8A';
-      o['d' + k] = on(k) ? 'block' : 'none';
+  componentDidMount() {
+    const speed = this.props.animSpeed ?? 1;
+    const sbr = document.getElementById('pb-somos-br');
+    this.setBr = () => { if (sbr) sbr.style.display = innerWidth >= 720 ? '' : 'none'; };
+    this.setBr(); addEventListener('resize', this.setBr);
+    const d = (ms) => ms / speed;
+    const ease = 'cubic-bezier(.16,1,.3,1)';
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const setup = new Map();
+    const q = (s) => Array.from(document.querySelectorAll(s));
+    if (!reduce) {
+      q('[data-reveal]').forEach(el => {
+        const delay = +(el.dataset.delay || 0);
+        el.style.opacity = '0'; el.style.transform = 'translateY(36px)';
+        setup.set(el, () => {
+          el.style.transition = `opacity ${d(900)}ms ${ease} ${d(delay)}ms, transform ${d(1100)}ms ${ease} ${d(delay)}ms, color .3s`;
+          el.style.opacity = '1'; el.style.transform = 'none';
+          setTimeout(() => { el.style.transition = 'color .3s, transform .4s'; el.style.transform = ''; }, d(1100 + delay));
+        });
+      });
+      q('[data-clip]').forEach(el => {
+        let k = el.firstElementChild;
+        if (!k || el.childNodes.length > 1 || el.tagName !== 'DIV') {
+          k = document.createElement('span'); k.style.display = 'block';
+          while (el.firstChild) k.appendChild(el.firstChild);
+          el.appendChild(k);
+        }
+        k.style.clipPath = 'inset(0 0 100% 0)'; k.style.transform = 'translateY(40px)';
+        setup.set(el, () => {
+          k.style.transition = `clip-path ${d(1200)}ms ${ease}, transform ${d(1200)}ms ${ease}`;
+          k.style.clipPath = 'inset(-10% -5% -20% -5%)'; k.style.transform = 'none';
+        });
+      });
+      q('[data-line]').forEach(el => {
+        el.style.transformOrigin = 'left'; el.style.transform = 'scaleX(0)';
+        setup.set(el, () => { el.style.transition = `transform ${d(1400)}ms ${ease}`; el.style.transform = 'scaleX(1)'; });
+      });
+      q('svg[data-draw]').forEach(svg => {
+        const delay = +(svg.dataset.delay || 0);
+        const parts = Array.from(svg.querySelectorAll('path,circle,ellipse,rect,line,polyline'));
+        parts.forEach(p => {
+          const len = p.getTotalLength ? p.getTotalLength() : 400;
+          p.style.strokeDasharray = len; p.style.strokeDashoffset = len;
+        });
+        setup.set(svg, () => {
+          parts.forEach((p, i) => {
+            p.style.transition = `stroke-dashoffset ${d(1400)}ms cubic-bezier(.65,0,.35,1) ${d(delay + 250 + i * 160)}ms`;
+            p.style.strokeDashoffset = '0';
+          });
+        });
+      });
+      this.io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { const fn = setup.get(e.target); fn && fn(); this.io.unobserve(e.target); }
+      }), { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+      setup.forEach((_, el) => this.io.observe(el));
+    }
+    {
+      const boxes = ['equipo', 'clientes', 'testimonios'].map(id => document.getElementById(id)).filter(Boolean);
+      const eq = boxes[0];
+      const fit = () => {
+        const arts = q('[data-principle]');
+        if (!eq || !arts.length) return;
+        const left = arts[0].getBoundingClientRect().left;
+        let right = 0;
+        arts.forEach(a => {
+          const t = a.querySelector('h3'); if (!t) return;
+          const w = document.createTreeWalker(t, NodeFilter.SHOW_TEXT);
+          let n;
+          while ((n = w.nextNode())) {
+            if (!n.textContent.trim()) continue;
+            const r = document.createRange(); r.selectNodeContents(n);
+            Array.from(r.getClientRects()).forEach(c => { right = Math.max(right, c.right); });
+          }
+        });
+        if (right > left) boxes.forEach(b => b.style.width = Math.ceil(right - left) + 'px');
+      };
+      this.fitEq = fit;
+      fit(); setTimeout(fit, 600); setTimeout(fit, 1800);
+      document.fonts && document.fonts.ready.then(fit);
+      addEventListener('resize', fit);
+      this.revealT = setTimeout(() => setup.forEach((fn, el) => {
+        if (el.getBoundingClientRect().top < innerHeight) { fn(); this.io.unobserve(el); }
+      }), 1500);
+    }
+
+    const bar = document.getElementById('pb-progress');
+    const hero = document.getElementById('pb-hero-title');
+    if (hero) hero.style.translate = '';
+    const idx = document.getElementById('pb-index');
+    const idxLabel = document.getElementById('pb-index-label');
+    const arts = q('[data-principle]');
+    const manif = document.getElementById('manifiesto');
+    this.onScroll = () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+      const r = manif.getBoundingClientRect();
+      const inM = r.top < innerHeight * 0.5 && r.bottom > innerHeight * 0.5;
+
+    };
+    addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+
+    const cur = document.getElementById('pb-cursor');
+    const showCursor = false;
+    let mx = -100, my = -100, cx = -100, cy = -100;
+    if (showCursor) {
+      this.onMove = (e) => {
+        mx = e.clientX; my = e.clientY; cur.style.opacity = '1';
+        const big = e.target.closest && e.target.closest('a,[data-hover]');
+        cur.style.width = cur.style.height = big ? '56px' : '14px';
+        cur.style.margin = big ? '-28px 0 0 -28px' : '-7px 0 0 -7px';
+      };
+      addEventListener('mousemove', this.onMove);
+    }
+    const tracks = q('[data-marquee]').map(el => {
+      el.innerHTML += el.innerHTML;
+      return { el, dir: +el.dataset.marquee, x: 0 };
     });
-    return o;
+    const cue = document.getElementById('pb-cue');
+    let last = performance.now();
+    const tick = (t) => {
+      const dt = Math.min(64, t - last); last = t;
+      if (cue && !reduce) cue.style.transform = `translateY(${((t / 1400) % 1) * 74 - 18}px)`;
+      if (showCursor) { cx += (mx - cx) * 0.18; cy += (my - cy) * 0.18; cur.style.transform = `translate(${cx}px,${cy}px)`; }
+      if (!reduce) tracks.forEach(tr => {
+        const half = tr.el.scrollWidth / 2;
+        tr.x -= tr.dir * dt * 0.05 * speed;
+        if (tr.x <= -half) tr.x += half; if (tr.x > 0) tr.x -= half;
+        tr.el.style.transform = `translateX(${tr.x}px)`;
+      });
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() {
+    this.io && this.io.disconnect();
+    removeEventListener('scroll', this.onScroll);
+    this.onMove && removeEventListener('mousemove', this.onMove);
+    cancelAnimationFrame(this.raf);
+    this.fitEq && removeEventListener('resize', this.fitEq);
+    this.setBr && removeEventListener('resize', this.setBr);
+  }
+  renderVals() {
+    return {
+      stopLink: e => { e.stopPropagation(); if (e.currentTarget.getAttribute('href') === '#') e.preventDefault(); },
+      toggleAbout: () => {
+        const box = document.getElementById('pb-about'), btn = document.getElementById('pb-about-btn'), ic = document.getElementById('pb-about-icon');
+        this.aboutOpen = !this.aboutOpen;
+        box.style.gridTemplateRows = this.aboutOpen ? '1fr' : '0fr';
+        ic.style.transform = this.aboutOpen ? 'rotate(45deg)' : 'none';
+        btn.setAttribute('aria-expanded', String(this.aboutOpen));
+        if (this.aboutOpen) setTimeout(() => scrollTo({ top: btn.getBoundingClientRect().top + scrollY - 60, behavior: 'smooth' }), 100);
+      },
+    };
   }
 }
 </script>
